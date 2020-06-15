@@ -66,10 +66,11 @@ for i=1:size(cast_strong,1)
     else
         for j=1:size(L,2)-1
             interval_start=L(:,j);interval_end=L(:,j+1);
-            x_vals_extracted_ind=[find(x_vals_smallbin==ceil(interval_start(1))) find(x_vals_smallbin==floor(interval_end(1)))];
+            x_vals_extracted_ind=[find(x_vals_smallbin==floor(interval_start(1))) find(x_vals_smallbin==ceil(interval_end(1)))];
+            x_vals_extracted=x_vals_smallbin(x_vals_extracted_ind(1):x_vals_extracted_ind(2));
             head_extracted=head_smallbin(x_vals_extracted_ind(1):x_vals_extracted_ind(2));
             tail_extracted=tail_smallbin(x_vals_extracted_ind(1):x_vals_extracted_ind(2));         
-            if check_diamond(x_vals_extracted_ind,head_extracted,tail_extracted)
+            if check_diamond(x_vals_extracted,head_extracted,tail_extracted)
                 %% if diamond detected, whole cast_strong is C-shape
                 % c_shape=[cast_strong_start_frame   cast_strong_end_frame   ith event]                 
                 c_shape=vertcat(c_shape,[cs_start cs_end i]);
